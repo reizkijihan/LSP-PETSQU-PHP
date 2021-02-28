@@ -122,6 +122,14 @@ $koneksi = new mysqli("localhost","root","","petsqu");
                     {
                         include 'dataproduk.php';
                     }
+                    elseif ($_GET['halaman']=="editproduk")
+                    {
+                        include 'editproduk.php';
+                    }
+                    elseif ($_GET['halaman']=="tambahproduk")
+                    {
+                        include 'tambahproduk.php';
+                    }
                     elseif ($_GET['halaman']=="logout")
                     {
                         include 'logout.php';

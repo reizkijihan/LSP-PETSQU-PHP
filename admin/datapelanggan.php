@@ -1,3 +1,9 @@
+<?php
+
+require 'koneksi.php';
+$pelanggan = query("SELECT * FROM pelanggan");
+
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -24,29 +30,31 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama </th>
-                                        <th>Email</th>
+                                        <th>No.Hp</th>
+                                        <th>Alamat</th>
                                         <th>Action</th>
                                         
                                     </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $i =1; ?>
+		                        <?php $ambil=$koneksi->query("SELECT * FROM pelanggan"); ?>
+		                        <?php foreach ( $pelanggan as $row ) : ?> 
                                     <tr>
-                                    <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $row["nama_pelanggan"] ?></td>
+                                        <td><?= $row["no_hp"] ?></td>
+                                        <td><?= $row["alamat_pelanggan"] ?></td>
                                         <td>
                                         <a href="" class="btn btn-info"><i
-                                                    class="fas fa-clipboard-list"></i></i>Detail</a>
-                                        
-                                        <a href="" class="btn btn-primary"><i
-                                                    class="far fa-edit"></i>Ubah</a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#modal<%= karyawan.id %>"><i
-                                                    class="fas fa-exclamation-triangle"></i>Delete</button>
+                                                    class="fas fa-clipboard-list"></i></i>Pesanan</a>
+                                        <button type="button" class="btn btn-danger"><i
+                                                    class="fas fa-exclamation-triangle"></i>Non-Aktif</button>
                                             
                                         </td>
-                                        <tr>
-                                </thead>
-                                <tbody>
-                                    
+                                    </tr>
+                                    <?php $i++; ?>
+	                            <?php endforeach; ?>    
                                 </tbody>
                             </table>
                         </div>

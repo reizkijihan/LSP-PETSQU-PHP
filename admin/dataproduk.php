@@ -1,3 +1,10 @@
+<?php
+require 'koneksi.php';
+
+$produk = query("SELECT * FROM produk");
+
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -13,7 +20,7 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">        
-            <a href="" class="btn btn-secondary mb-3"><i class="fas fa-plus"></i>Tambah
+            <a href="index.php?halaman=tambahproduk" class="btn btn-secondary mb-3"><i class="fas fa-plus"></i>Tambah
                 Produk</a><br>
             <div class="row">
                 <div class="col-12">
@@ -24,32 +31,35 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama </th>
+                                        <th>Nama </th>                            
+                                        <th>Gambar </th>                            
                                         <th>Harga</th>
+                                        <th>Deskripsi</th>
                                         <th>Action</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                <?php $i =1; ?>
+		                        <?php $ambil=$koneksi->query("SELECT * FROM produk"); ?>
+		                        <?php foreach ( $produk as $row ) : ?> 
                                     <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $row["nama_produk"] ?></td>
+                                        <td> <img src="../img/<?= $row['gambar']; ?>" width="50"> </td>
+                                        <td><?= $row["harga_produk"] ?></td>
+                                        <td><?= $row["deskripsi_produk"] ?></td>
                                         <td>
-                                        <a href="" class="btn btn-info"><i
-                                                    class="fas fa-clipboard-list"></i></i>Detail</a>
                                         
-                                        <a href="" class="btn btn-primary"><i
-                                                    class="far fa-edit"></i>Ubah</a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#modal<%= karyawan.id %>"><i
-                                                    class="fas fa-exclamation-triangle"></i>Delete</button>
+                                        <a href="index.php?halaman=editproduk&id=<?= $row['id']; ?>" class="btn btn-primary"><i
+                                                    class="far fa-edit"></i>Edit</a>
+                                        <a href="index.php?halaman=deleteproduk&id=<?= $row['id']; ?>"  onclick="return confirm('Hapus?');" class="btn-danger btn">Delete</a>
                                             
                                         </td>
                                         
                                     </tr>
-                                    
+                                    <?php $i++; ?>
+	                        <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -59,3 +69,4 @@
         </div>
     </div>
 </div>
+
